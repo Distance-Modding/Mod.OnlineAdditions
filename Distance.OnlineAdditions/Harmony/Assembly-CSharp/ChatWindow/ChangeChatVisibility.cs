@@ -7,7 +7,7 @@ namespace Distance.OnlineAdditions.Harmony
     internal class ChangeChatVisibility__ChatWindow
     {
         [HarmonyPrefix]
-        internal static bool HideChatPrefix(ChatWindow _instance)
+        internal static bool HideChatPrefix()
         {
             Mod.Instance.Logger.Debug("DIE IDIOT");
             if (Mod.Instance.Config.HideChat)
