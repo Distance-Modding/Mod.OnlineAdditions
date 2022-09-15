@@ -1,20 +1,18 @@
-﻿/*using HarmonyLib;
+﻿using HarmonyLib;
 
 namespace Distance.OnlineAdditions.Harmony
 {
-    //IT DOESN'T PATCH!!!?!??!?!
     [HarmonyPatch(typeof(ChatWindow), "Update")]
     internal class Update__ChatWindow
     {
         [HarmonyPostfix]
-        internal static void HideChatPost(ChatWindow _instance)
+        internal static void HideChatPost(ChatWindow __instance)
         {
             if(Mod.Instance.Config.HideChat)
             {
-                _instance.panel_.alpha = 0f;
-                Mod.Instance.Logger.Debug("LMAOOO");
-               // _instance.SetTextListLineCount(0);
+                __instance.panel_.alpha = 0f;
+               // __instance.SetTextListLineCount(0);
             }
         }
     }
-}*/
+}
