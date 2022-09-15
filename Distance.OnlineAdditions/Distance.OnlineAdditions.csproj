@@ -7,11 +7,12 @@
     <ProjectGuid>{7BCB2908-B003-45D9-BE68-50CBA5217603}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mod.Template</RootNamespace>
-    <AssemblyName>Mod.Template</AssemblyName>
+    <RootNamespace>Distance.OnlineAdditions</RootNamespace>
+    <AssemblyName>Distance.OnlineAdditions</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -86,11 +87,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigLogic.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\ChatWindow\ChangeChatVisibility.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\ChatWindow\Update.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mod.Template.targets" />
+    <None Include="Distance.OnlineAdditions.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
