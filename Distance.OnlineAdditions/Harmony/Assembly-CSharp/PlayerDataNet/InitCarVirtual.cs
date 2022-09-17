@@ -13,15 +13,7 @@ namespace Distance.OnlineAdditions.Harmony
             //Activate collisions
             if (Mod.Instance.Config.EnableCollision)
             {
-                try
-                {
-                    __instance.Car_.SetLayerRecursively(Layers.CollidesWithCars);
-                }
-                catch (Exception e)
-                {
-                    Mod.Instance.Logger.Debug(e);
-                    Mod.Instance.Logger.Debug("Failed to set layers to collides with cars");
-                }
+                __instance.SetAllColliderLayers(Layers.Default);
             }
 
             //Hide player names
