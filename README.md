@@ -7,5 +7,6 @@ What this adds:
 - Ability to enable collisions in multiplayer (Disables leaderboard uploads)
 - Ability to hide chat in multiplayer
 
-DO NOT TURN ON MOTORCYCLE MODE IN MULTIPLAYER
+DO NOT TURN ON MOTORCYCLE MODE IN MULTIPLAYER!
+
 Currently it causes quite a huge bug for other players in the server, including those who don't even have the mod.
