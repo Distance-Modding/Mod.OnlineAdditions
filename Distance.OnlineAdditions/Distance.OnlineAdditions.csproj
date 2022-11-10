@@ -89,7 +89,10 @@
   <ItemGroup>
     <Compile Include="ConfigLogic.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ChatWindow\Update.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\CheatMenu\InitializeVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
     <Compile Include="Mod.cs" />
@@ -99,6 +102,7 @@
     <None Include="Distance.OnlineAdditions.targets" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <!-- 15.0 is for VS2017, adjust if necessary -->
