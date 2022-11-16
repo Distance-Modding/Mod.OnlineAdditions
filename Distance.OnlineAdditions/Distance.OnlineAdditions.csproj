@@ -89,7 +89,7 @@
   <ItemGroup>
     <Compile Include="ConfigLogic.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ChatWindow\Update.cs" />
-    <Compile Include="Harmony\Assembly-CSharp\CheatMenu\InitializeVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\CheatMenu\TweakCheat.cs" />
     <Compile Include="Harmony\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />

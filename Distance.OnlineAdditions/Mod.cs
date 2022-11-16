@@ -61,11 +61,24 @@ namespace Distance.OnlineAdditions
             }
             catch (Exception e)
             {
-                Logger.Info(e);
-                Logger.Info("This likely happened because you have the wrong version of Centrifuge.Distance. \nTo fix this, be sure to use the Centrifuge.Distance.dll file that came included with the mod's zip file. \nDespite this error, the mod will still function, however, you will not have access to the mod's menu.");
+                Logger.Exception(e);
+                Logger.Error("This likely happened because you have the wrong version of Centrifuge.Distance. \nTo fix this, be sure to use the Centrifuge.Distance.dll file that came included with the mod's zip file. \nDespite this error, the mod will still function, however, you will not have access to the mod's menu.");
             }
 
-            RuntimePatcher.AutoPatch();
+            try
+            {
+                // Never ever EVER use this!!!
+                // It's the same as below (with `GetCallingAssembly`) wrapped around a silent catch-all.
+                //RuntimePatcher.AutoPatch();
+
+                RuntimePatcher.HarmonyInstance.PatchAll(System.Reflection.Assembly.GetExecutingAssembly());
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Online Additions: Error during Harmony.PatchAll()");
+                Logger.Exception(ex);
+                throw;
+            }
         }
 
         private void CreateSettingsMenu()
