@@ -30,6 +30,18 @@ namespace Distance.OnlineAdditions
             get { return Get<bool>("HidePlayerNames"); }
             set { Set("HidePlayerNames", value); }
         }
+
+        public bool DisableTimeout
+        {
+            get { return Get<bool>("DisableTimeout"); }
+            set { Set("DisableTimeout", value); }
+        }
+
+        public int TimeLimitAmount
+        {
+            get { return Get<int>("TimeLimitAmount"); }
+            set { Set("TimeLimitAmount", value); }
+        }
         #endregion
 
         internal Settings Config;
@@ -50,6 +62,8 @@ namespace Distance.OnlineAdditions
             Get("EnableCheatsInMultiplayer", false);
             Get("HideChat", false);
             Get("HidePlayerNames", false);
+            Get("DisableTimeout", false);
+            Get("TimeLimitAmount", 60);
             //Save settings to Config.json
             Save();
         }

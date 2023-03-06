@@ -95,6 +95,7 @@
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

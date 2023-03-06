@@ -25,6 +25,7 @@ namespace Distance.OnlineAdditions
         public ConfigLogic Config { get; private set; }
 
         public bool UploadScore { get; set; }
+        
 
         /// <summary>
         /// Method called as soon as the mod is loaded.
@@ -41,6 +42,9 @@ namespace Distance.OnlineAdditions
             Instance = this;
 
             Manager = manager;
+
+            //True by default so the first time that gets set online isn't guarenteed to not upload
+            UploadScore = true;
 
             Config = gameObject.AddComponent<ConfigLogic>();
 
@@ -104,6 +108,18 @@ namespace Distance.OnlineAdditions
                 .WithGetter(() => Config.EnableCollision)
                 .WithSetter((x) => Config.EnableCollision = x)
                 .WithDescription("Toggle whether or not collisions are enabled when playing online. (Turns off leaderboard uploads)"),
+
+                new IntegerSlider(MenuDisplayMode.Both, "settings:timeout_amount", "ADJUST LENGTH OF TIMEOUT TIME")
+                .WithDefaultValue(60)
+                .LimitedByRange(0, 180)
+                .WithGetter(() => Config.TimeLimitAmount)
+                .WithSetter((x) => Config.TimeLimitAmount = x)
+                .WithDescription("Adjust the amount of time is set when a time limit occurs"),
+
+                new CheckBox(MenuDisplayMode.Both, "setting:disable_timeout", "DISABLE TIMEOUT")
+                .WithGetter(() => Config.DisableTimeout)
+                .WithSetter((x) => Config.DisableTimeout = x)
+                .WithDescription("Completely disables the 60 seconds timeout when one player is left"),
             };
 
             Menus.AddNew(MenuDisplayMode.Both, settingsMenu, "ONLINE ADDITIONS", "Settings for the Online Additions mod");

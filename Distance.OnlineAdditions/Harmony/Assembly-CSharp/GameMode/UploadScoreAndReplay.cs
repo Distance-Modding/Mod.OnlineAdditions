@@ -8,8 +8,8 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPrefix]
         internal static bool DoISkipMethod()
         {
-            //False skips the method, true does not.
-            if (!Mod.Instance.UploadScore)
+            //False skips the original method, true does not.
+            if (!Mod.Instance.UploadScore && G.Sys.NetworkingManager_.IsOnline_)
             {
                 Mod.Instance.Logger.Debug("Skipping leaderboard upload because online collisions or cheats were enabled");
 

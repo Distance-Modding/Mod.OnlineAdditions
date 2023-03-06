@@ -8,7 +8,7 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPrefix]
         internal static bool KeepCheatsPrefix(CheatsManager __instance)
         {
-            if (Mod.Instance.Config.EnableCheatsInMultiplayer)
+            if (Mod.Instance.Config.EnableCheatsInMultiplayer && G.Sys.NetworkingManager_.IsOnline_)
             {
                 __instance.gameplayCheatsRecognized_ = true;
             }
