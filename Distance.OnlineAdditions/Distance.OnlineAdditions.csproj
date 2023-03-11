@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigLogic.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\ChatInputV2\CheckForServerCode.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ChatWindow\Update.cs" />
     <Compile Include="Harmony\Assembly-CSharp\CheatMenu\TweakCheat.cs" />
     <Compile Include="Harmony\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

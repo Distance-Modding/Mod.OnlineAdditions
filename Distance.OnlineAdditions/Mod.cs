@@ -25,6 +25,9 @@ namespace Distance.OnlineAdditions
         public ConfigLogic Config { get; private set; }
 
         public bool UploadScore { get; set; }
+        public bool AmIHost { get; set; }
+        public bool AllPlayersFinished { get; set; }
+        public bool CountdownActive { get; set; }
         
 
         /// <summary>
@@ -45,6 +48,9 @@ namespace Distance.OnlineAdditions
 
             //True by default so the first time that gets set online isn't guarenteed to not upload
             UploadScore = true;
+            AmIHost = false;
+            AllPlayersFinished = false;
+            CountdownActive = false;
 
             Config = gameObject.AddComponent<ConfigLogic>();
 
