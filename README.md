@@ -9,4 +9,8 @@ What this adds:
 - Ability to disable the 60 seconds timeout in multiplayer
 - Ability to change the length of time for the timeout in multiplayer
 
+KNOWN ISSUE:
+When collisions are active the network cars are fairly jittery. Not ideal
+Also, when you are spectating you have to wait until a network car respawns for their physics to be corrected.
+
 Motorcycle Mode will get disabled in multiplayer.
