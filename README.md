@@ -9,4 +9,7 @@ What this adds:
 - Ability to disable the 60 seconds timeout in multiplayer
 - Ability to change the length of time for the timeout in multiplayer
 
+KNOWN ISSUE:
+When collisions are active the network cars are fairly jittery. Not ideal
+
 Motorcycle Mode will get disabled in multiplayer.
