@@ -94,8 +94,12 @@
     <Compile Include="Harmony\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\GameManager\FadeOutToScenePrivate.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\GameManager\GoToCurrentLevel.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\RigidbodyStateTransceiver\EaseTowards.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
     <Compile Include="Mod.cs" />

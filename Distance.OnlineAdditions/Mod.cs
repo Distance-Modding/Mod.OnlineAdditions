@@ -24,10 +24,15 @@ namespace Distance.OnlineAdditions
 
         public ConfigLogic Config { get; private set; }
 
+        public GameObject playerCar { get; set; }
+
+        public string carName { get; set; }
+
         public bool UploadScore { get; set; }
         public bool AmIHost { get; set; }
         public bool AllPlayersFinished { get; set; }
         public bool CountdownActive { get; set; }
+        public bool Restarting { get; set; }
         
 
         /// <summary>
@@ -51,6 +56,7 @@ namespace Distance.OnlineAdditions
             AmIHost = false;
             AllPlayersFinished = false;
             CountdownActive = false;
+            Restarting = false;
 
             Config = gameObject.AddComponent<ConfigLogic>();
 

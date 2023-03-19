@@ -1,5 +1,4 @@
-﻿using Events.ClientToAllClients;
-using Events.RaceMode;
+﻿using Events.RaceMode;
 using HarmonyLib;
 
 namespace Distance.OnlineAdditions.Harmony
@@ -10,7 +9,20 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPrefix]
         internal static bool CheckForCommands(ChatInputV2 __instance, string text)
         {
-            if(string.IsNullOrEmpty(text) || text.Length > 0 && text[0] != '/')
+            System.Collections.IEnumerator RestartPlayerAfter(float time)
+            {
+                G.Sys.GameManager_.Mode_.FinishAllLocalPlayers(FinishType.Spectate);
+                /*if (Mod.Instance.playerCar != null)
+                {
+                    Mod.Instance.playerCar.Destroy();
+                }*/
+                yield return new UnityEngine.WaitForSeconds(time);
+                
+                ChatLog.AddMessage("RESTART ISN'T FUNCTIONAL YOU FOOL!!!!");
+                //G.Sys.GameManager_.FadeOutToGameMode(true);
+            }
+
+            if (string.IsNullOrEmpty(text) || text.Length > 0 && text[0] != '/')
             {
                 return true;
             }
@@ -47,8 +59,9 @@ namespace Distance.OnlineAdditions.Harmony
                 }
                 if(key == "restartme")
                 {
-                    ChatLog.AddMessage("Lmao this guy is testing a modded command that doesn't even work! Point and laugh!!!");
-                    //G.Sys.GameManager_.RestartLevel(); I have to mess with how restart level works if I wanna use this
+                    ChatLog.AddMessage("Oh you're trying to restart?");
+                    __instance.StartCoroutine(RestartPlayerAfter(3f));
+                    Mod.Instance.Restarting = true;
                     return false;
                 }
             }

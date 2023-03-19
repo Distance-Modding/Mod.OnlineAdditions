@@ -18,6 +18,7 @@ namespace Distance.OnlineAdditions.Harmony
             {
                 yield return new UnityEngine.WaitForSeconds(seconds);
                 __instance.SetAllColliderLayers(Layers.Default);
+                __instance.CarLOD_.rigidbody_.isKinematic = true;
             }
 
             //Activate collisions
@@ -32,6 +33,8 @@ namespace Distance.OnlineAdditions.Harmony
 
             
         }
+
+        
     }
 
     
