@@ -8,7 +8,7 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPrefix]
         internal static bool KinematicEaseTowards(RigidbodyStateTransceiver __instance)
         {
-            if (Mod.Instance.Config.EnableCollision && Mod.Instance.playerFinishType == FinishType.None)
+            if (Mod.Instance.Config.EnableCollision /*&& Mod.Instance.playerFinishType == FinishType.None*/)
             {
                 RigidbodyStateTransceiver.Snapshot snapshot = RigidbodyStateTransceiver.Snapshot.Difference(__instance.goal_, new RigidbodyStateTransceiver.Snapshot(__instance.rigidbody_));
                 double sqrMagnitude = snapshot.pos.sqrMagnitude;

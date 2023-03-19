@@ -17,11 +17,11 @@ namespace Distance.OnlineAdditions.Harmony
             System.Collections.IEnumerator ActivateCollidersAfterSeconds(float seconds)
             {
                 yield return new UnityEngine.WaitForSeconds(seconds);
-                if (Mod.Instance.playerFinishType == FinishType.None)
-                {
+                //if (Mod.Instance.playerFinishType == FinishType.None)
+                //{
                     __instance.SetAllColliderLayers(Layers.Default);
                     __instance.CarLOD_.rigidbody_.isKinematic = true;
-                }
+                //}
             }
 
             //Activate collisions
