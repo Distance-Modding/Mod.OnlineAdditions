@@ -98,6 +98,7 @@
     <Compile Include="Harmony\Assembly-CSharp\GameManager\GoToCurrentLevel.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\PlayerDataLocal\OnPlayerEventFinished.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\RigidbodyStateTransceiver\EaseTowards.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />

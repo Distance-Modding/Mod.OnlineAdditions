@@ -26,7 +26,7 @@ namespace Distance.OnlineAdditions
 
         public GameObject playerCar { get; set; }
 
-        public string carName { get; set; }
+        public FinishType playerFinishType { get; set; }
 
         public bool UploadScore { get; set; }
         public bool AmIHost { get; set; }
