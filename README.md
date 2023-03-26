@@ -8,6 +8,7 @@ What this adds:
 - Ability to hide chat in multiplayer
 - Ability to disable the 60 seconds timeout in multiplayer
 - Ability to change the length of time for the timeout in multiplayer
+- Ability to disable the audio coming from other cars in multiplayer
 
 KNOWN ISSUE:
 When collisions are active the network cars are fairly jittery. Not ideal. <br>
