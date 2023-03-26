@@ -53,7 +53,6 @@ namespace Distance.OnlineAdditions
             AmIHost = false;
             AllPlayersFinished = false;
             CountdownActive = false;
-            Restarting = false;
 
             Config = gameObject.AddComponent<ConfigLogic>();
 
