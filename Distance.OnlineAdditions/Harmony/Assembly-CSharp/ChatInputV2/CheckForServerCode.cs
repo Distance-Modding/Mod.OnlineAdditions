@@ -9,19 +9,6 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPrefix]
         internal static bool CheckForCommands(ChatInputV2 __instance, string text)
         {
-            System.Collections.IEnumerator RestartPlayerAfter(float time)
-            {
-                G.Sys.GameManager_.Mode_.FinishAllLocalPlayers(FinishType.Spectate);
-                /*if (Mod.Instance.playerCar != null)
-                {
-                    Mod.Instance.playerCar.Destroy();
-                }*/
-                yield return new UnityEngine.WaitForSeconds(time);
-                
-                ChatLog.AddMessage("RESTART ISN'T FUNCTIONAL YOU FOOL!!!!");
-                //G.Sys.GameManager_.FadeOutToGameMode(true);
-            }
-
             if (string.IsNullOrEmpty(text) || text.Length > 0 && text[0] != '/')
             {
                 return true;
@@ -55,13 +42,6 @@ namespace Distance.OnlineAdditions.Harmony
                 {
                     Events.StaticTargetedEvent<FinalCountdownCancel.Data>.Broadcast(UnityEngine.RPCMode.All, new FinalCountdownCancel.Data());
                     Mod.Instance.CountdownActive = false;
-                    return false;
-                }
-                if(key == "restartme")
-                {
-                    ChatLog.AddMessage("Oh you're trying to restart?");
-                    __instance.StartCoroutine(RestartPlayerAfter(3f));
-                    Mod.Instance.Restarting = true;
                     return false;
                 }
             }

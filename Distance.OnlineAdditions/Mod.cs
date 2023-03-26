@@ -26,14 +26,11 @@ namespace Distance.OnlineAdditions
 
         public GameObject playerCar { get; set; }
 
-        public FinishType playerFinishType { get; set; }
-
         public bool UploadScore { get; set; }
         public bool AmIHost { get; set; }
         public bool AllPlayersFinished { get; set; }
+        public bool PlayerFinished { get; set; }
         public bool CountdownActive { get; set; }
-        public bool Restarting { get; set; }
-        
 
         /// <summary>
         /// Method called as soon as the mod is loaded.
@@ -120,6 +117,11 @@ namespace Distance.OnlineAdditions
                 .WithGetter(() => Config.EnableCollision)
                 .WithSetter((x) => Config.EnableCollision = x)
                 .WithDescription("Toggle whether or not collisions are enabled when playing online. (Turns off leaderboard uploads)"),
+
+                new CheckBox(MenuDisplayMode.Both, "settings:disable_audio", "DISABLE ONLINE CAR AUDIO")
+                .WithGetter(() => Config.DisableCarAudio)
+                .WithSetter((x) => Config.DisableCarAudio = x)
+                .WithDescription("Toggles whether car audio from other cars in multiplayer are on"),
 
                 new IntegerSlider(MenuDisplayMode.Both, "settings:timeout_amount", "ADJUST LENGTH OF TIMEOUT TIME")
                 .WithDefaultValue(60)

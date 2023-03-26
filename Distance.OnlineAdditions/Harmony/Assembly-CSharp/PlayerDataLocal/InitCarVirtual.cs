@@ -9,6 +9,7 @@ namespace Distance.OnlineAdditions.Harmony
         internal static void GetCar(PlayerDataLocal __instance)
         {
             Mod.Instance.playerCar = __instance.carObj_;
+            Mod.Instance.PlayerFinished = false;
         }
     }
 }

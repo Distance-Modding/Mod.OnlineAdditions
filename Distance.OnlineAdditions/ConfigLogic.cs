@@ -31,6 +31,12 @@ namespace Distance.OnlineAdditions
             set { Set("HidePlayerNames", value); }
         }
 
+        public bool DisableCarAudio
+        {
+            get { return Get<bool>("DisableCarAudio"); }
+            set { Set("DisableCarAudio", value); }
+        }
+
         public bool DisableTimeout
         {
             get { return Get<bool>("DisableTimeout"); }
@@ -62,6 +68,7 @@ namespace Distance.OnlineAdditions
             Get("EnableCheatsInMultiplayer", false);
             Get("HideChat", false);
             Get("HidePlayerNames", false);
+            Get("DisableCarAudio", false);
             Get("DisableTimeout", false);
             Get("TimeLimitAmount", 60);
             //Save settings to Config.json
