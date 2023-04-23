@@ -11,7 +11,8 @@ What this adds:
 - Ability to disable the audio coming from other cars in multiplayer
 
 KNOWN ISSUE:
-When collisions are active the network cars are fairly jittery. Not ideal. <br>
-Also, when you are spectating you have to wait until a network car respawns for their physics to be corrected.
+When collisions are active the network cars are a little jittery when you're close to them. Not ideal, but it works fine.
 
-Motorcycle Mode will get disabled in multiplayer.
+The /canceltimeout command only works locally. It does not activate for everyone in the lobby.
+
+I forgot to make the infinite killgrid not render for every car
