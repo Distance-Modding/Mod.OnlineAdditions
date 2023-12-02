@@ -124,7 +124,7 @@ namespace Distance.OnlineAdditions
 
                 new IntegerSlider(MenuDisplayMode.Both, "settings:timeout_amount", "ADJUST LENGTH OF TIMEOUT TIME")
                 .WithDefaultValue(60)
-                .LimitedByRange(0, 180)
+                .LimitedByRange(0, 300)
                 .WithGetter(() => Config.TimeLimitAmount)
                 .WithSetter((x) => Config.TimeLimitAmount = x)
                 .WithDescription("Adjust the amount of time is set when a time limit occurs"),
@@ -133,6 +133,32 @@ namespace Distance.OnlineAdditions
                 .WithGetter(() => Config.DisableTimeout)
                 .WithSetter((x) => Config.DisableTimeout = x)
                 .WithDescription("Completely disables the 60 seconds timeout when one player is left"),
+
+                new CheckBox(MenuDisplayMode.Both, "setting:disable_killgrid", "DISABLE MULTI KILLGRIDS")
+                .WithGetter(() => Config.DisableMultiKillGridRender)
+                .WithSetter((x) => Config.DisableMultiKillGridRender = x)
+                .WithDescription("Disables the rendering of the kill grid for every player in multiplayer. The killgrid will only render for you!"),
+
+                new FloatSlider(MenuDisplayMode.Both, "settings:outline_brightness", "ADJUST CAR OUTLINE BRIGHTNESS")
+                .WithDefaultValue(1)
+                .LimitedByRange(0, 1)
+                .WithGetter(() => Config.OutlineBrightness)
+                .WithSetter((x) => Config.OutlineBrightness = x)
+                .WithDescription("Adjust the brightness of the outlines on online player cars"),
+
+                new ListBox<int>(MenuDisplayMode.Both, "settings:level_of_detail", "MAXIMUM CAR DETAIL")
+                .WithEntries(new System.Collections.Generic.Dictionary<string, int>()
+                {
+                    { "Ultra", 1 },
+                    { "Very High", 2 },
+                    { "High", 3 },
+                    { "Medium", 4 },
+                    { "Low", 5 },
+                    { "Lowest", 6 }
+                })
+                .WithGetter(() => Config.MaxLevelOfDetail)
+                .WithSetter((x) => Config.MaxLevelOfDetail = x)
+                .WithDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. Ultra is the usual default."),
             };
 
             Menus.AddNew(MenuDisplayMode.Both, settingsMenu, "ONLINE ADDITIONS", "Settings for the Online Additions mod");

@@ -8,7 +8,6 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPostfix]
         internal static void VirtualedYourVirtual(TimeBasedMode __instance)
         {
-            Mod.Instance.Logger.Debug("SETTING BOOLS");
             Mod.Instance.AmIHost = __instance.IsHost_;
             Mod.Instance.CountdownActive = false;
             Mod.Instance.AllPlayersFinished = false;

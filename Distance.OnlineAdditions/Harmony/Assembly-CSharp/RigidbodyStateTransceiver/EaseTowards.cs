@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+﻿/*using HarmonyLib;
 
 namespace Distance.OnlineAdditions.Harmony
 {
@@ -27,7 +27,7 @@ namespace Distance.OnlineAdditions.Harmony
                 UnityEngine.Vector3 vector3_2 = RigidbodyStateTransceiver.posCorrectionSpringDamping_ * snapshot.vel;
                 UnityEngine.Vector3 vector3_3 = 250f * snapshot.rot.ToVector3();
                 UnityEngine.Vector3 vector3_4 = RigidbodyStateTransceiver.rotCorrectionSpringDamping_ * snapshot.rotVel;
-                UnityEngine.Quaternion deltaRotation = UnityEngine.Quaternion.Euler(vector3_3 + vector3_4);*/
+                UnityEngine.Quaternion deltaRotation = UnityEngine.Quaternion.Euler(vector3_3 + vector3_4);*
 
                 RigidbodyStateTransceiver.Snapshot prevSnapshot = RigidbodyStateTransceiver.Snapshot.Difference(__instance.prevGoal_, new RigidbodyStateTransceiver.Snapshot(__instance.rigidbody_));
 
@@ -48,4 +48,4 @@ namespace Distance.OnlineAdditions.Harmony
             }
         }
     }
-}
+}*/

@@ -43,10 +43,28 @@ namespace Distance.OnlineAdditions
             set { Set("DisableTimeout", value); }
         }
 
+        public bool DisableMultiKillGridRender
+        {
+            get { return Get<bool>("DisableMultiKillGridRender"); }
+            set { Set("DisableMultiKillGridRender", value); }
+        }
+
         public int TimeLimitAmount
         {
             get { return Get<int>("TimeLimitAmount"); }
             set { Set("TimeLimitAmount", value); }
+        }
+
+        public int MaxLevelOfDetail
+        {
+            get { return Get<int>("MaxLevelOfDetail"); }
+            set { Set("MaxLevelOfDetail", value); }
+        }
+
+        public float OutlineBrightness
+        {
+            get { return Get<float>("OutlineBrightness"); }
+            set { Set("OutlineBrightness", value); }
         }
         #endregion
 
@@ -70,7 +88,10 @@ namespace Distance.OnlineAdditions
             Get("HidePlayerNames", false);
             Get("DisableCarAudio", false);
             Get("DisableTimeout", false);
+            Get("DisableMultiKillGridRender", false);
             Get("TimeLimitAmount", 60);
+            Get("MaxLevelOfDetail", 1);
+            Get("OutlineBrightness", 1);
             //Save settings to Config.json
             Save();
         }

@@ -88,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigLogic.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\RigidbodyStateTransceiver\FixedUpdate.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\CarLevelOfDetail\IncrementLevel.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\CarLevelOfDetail\SetLevelOfDetail.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ChatInputV2\CheckForServerCode.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ChatWindow\Update.cs" />
     <Compile Include="Harmony\Assembly-CSharp\CheatMenu\TweakCheat.cs" />
@@ -95,9 +98,11 @@
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Harmony\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\KillGrid\OnEventAddRemovePlayerData.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataLocal\LocalOnPlayerEventFinished.cs" />
     <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
+    <Compile Include="Harmony\Assembly-CSharp\PlayerDataNet\SetOutlineColor.cs" />
     <Compile Include="Harmony\Assembly-CSharp\RigidbodyStateTransceiver\EaseTowards.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
     <Compile Include="Harmony\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />

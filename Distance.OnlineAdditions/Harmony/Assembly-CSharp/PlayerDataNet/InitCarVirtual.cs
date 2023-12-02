@@ -3,10 +3,6 @@
 namespace Distance.OnlineAdditions.Harmony
 {
     //Enable to collider on network cars
-
-    [HarmonyPatch(typeof(PlayerDataNet))]
-
-
     [HarmonyPatch(typeof(PlayerDataNet), "InitCarVirtual")]
     internal class PlayerDataNet__InitCarVirtual
     {
@@ -21,6 +17,7 @@ namespace Distance.OnlineAdditions.Harmony
                 {
                     __instance.SetAllColliderLayers(Layers.Default);
                     __instance.CarLOD_.rigidbody_.isKinematic = true;
+                    __instance.CarLOD_.SetCarSimulationEnabled(true);
                 }
             }
 
