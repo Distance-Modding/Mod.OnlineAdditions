@@ -8,15 +8,21 @@ namespace Distance.OnlineAdditions.Harmony
         [HarmonyPostfix]
         internal static void MakeSureSimulationIsOn(CarLevelOfDetail __instance)
         {
-            if (__instance.type_ == CarLevelOfDetail.Type.Networked && Mod.Instance.Config.EnableCollision)
+            if (__instance.type_ == CarLevelOfDetail.Type.Networked && Mod.Instance.Config.EnableCollision && !Mod.Instance.PlayerFinished)
             {
                 __instance.SetCarSimulationEnabled(true);
             }
             else
             {
-                if(__instance.rigidbody_.isKinematic)
+                if (Mod.Instance.PlayerFinished)
                 {
-                    __instance.rigidbody_.isKinematic = false;
+                    __instance.SetCarSimulationEnabled(false);
+
+                    if (__instance.rigidbody_.isKinematic)
+                    {
+                        __instance.rigidbodyStateTransceiver_.setCarOnFixedUpdate_ = false;
+                        __instance.rigidbody_.isKinematic = false;
+                    }
                 }
             }
         }

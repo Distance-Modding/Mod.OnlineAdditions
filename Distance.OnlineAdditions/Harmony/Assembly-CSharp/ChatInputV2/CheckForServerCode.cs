@@ -1,5 +1,6 @@
 ﻿using Events.RaceMode;
 using HarmonyLib;
+using System.Text.RegularExpressions;
 
 namespace Distance.OnlineAdditions.Harmony
 {
@@ -32,9 +33,19 @@ namespace Distance.OnlineAdditions.Harmony
 
             if(key != null)
             {
-                if(key == "timeout" && Mod.Instance.AmIHost && !Mod.Instance.AllPlayersFinished)
+                if (key == "timeout" && Mod.Instance.AmIHost && !Mod.Instance.AllPlayersFinished)
                 {
-                    Events.StaticTargetedEvent<FinalCountdownActivate.Data>.Broadcast(UnityEngine.RPCMode.All, new FinalCountdownActivate.Data(Timex.ModeTime_ + Mod.Instance.Config.TimeLimitAmount, UnityEngine.Mathf.RoundToInt(Mod.Instance.Config.TimeLimitAmount)));
+                    int time;
+                    if (Regex.Match(str, @"^\d+$").Success)
+                    {
+                        time = int.Parse(Regex.Match(str, @"^\d+$").Value);
+                    }
+                    else
+                    {
+                        time = Mod.Instance.Config.TimeLimitAmount;
+                    }
+
+                    Events.StaticTargetedEvent<FinalCountdownActivate.Data>.Broadcast(UnityEngine.RPCMode.All, new FinalCountdownActivate.Data(Timex.ModeTime_ + time, UnityEngine.Mathf.RoundToInt(time)));
                     Mod.Instance.CountdownActive = true;
                     return false;
                 }

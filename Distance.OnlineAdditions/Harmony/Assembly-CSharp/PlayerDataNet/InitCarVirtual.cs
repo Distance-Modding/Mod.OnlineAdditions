@@ -15,8 +15,8 @@ namespace Distance.OnlineAdditions.Harmony
                 yield return new UnityEngine.WaitForSeconds(seconds);
                 if (!Mod.Instance.PlayerFinished)
                 {
-                    __instance.SetAllColliderLayers(Layers.Default);
-                    __instance.CarLOD_.rigidbody_.isKinematic = true;
+                    __instance.SetAllColliderLayers(Layers.OnlyPlayer1);
+                    //__instance.CarLOD_.rigidbody_.isKinematic = true;
                     __instance.CarLOD_.SetCarSimulationEnabled(true);
                 }
             }

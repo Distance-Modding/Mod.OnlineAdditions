@@ -31,6 +31,7 @@ namespace Distance.OnlineAdditions
         public bool AllPlayersFinished { get; set; }
         public bool PlayerFinished { get; set; }
         public bool CountdownActive { get; set; }
+        public int CountdownLength { get; set; }
 
         /// <summary>
         /// Method called as soon as the mod is loaded.
@@ -55,6 +56,8 @@ namespace Distance.OnlineAdditions
             CountdownActive = false;
 
             Config = gameObject.AddComponent<ConfigLogic>();
+
+            CountdownLength = Config.TimeLimitAmount;
 
             //Check whether or not leaderboard uploads can happen
             OnConfigChanged(Config);
@@ -158,7 +161,7 @@ namespace Distance.OnlineAdditions
                 })
                 .WithGetter(() => Config.MaxLevelOfDetail)
                 .WithSetter((x) => Config.MaxLevelOfDetail = x)
-                .WithDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. Ultra is the usual default."),
+                .WithDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. Ultra is the usual default. For an idea of how this looks, the lowest setting turns off all animations of an online car."),
             };
 
             Menus.AddNew(MenuDisplayMode.Both, settingsMenu, "ONLINE ADDITIONS", "Settings for the Online Additions mod");
