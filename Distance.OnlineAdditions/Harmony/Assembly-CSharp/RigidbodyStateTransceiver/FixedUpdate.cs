@@ -10,10 +10,10 @@ namespace Distance.OnlineAdditions.Harmony
         {
             if (!__instance.setCarOnFixedUpdate_)
                 return false;
-            __instance.rigidbody_.transform.position = __instance.posSpring_.Pos_ + __instance.setCarOnFixedUpdateCoef_ * 0.01f * __instance.velSpring_.Pos_;
-            __instance.rigidbody_.transform.rotation = __instance.rotSpring_.Pos_;
-            __instance.rigidbody_.velocity = __instance.velSpring_.Pos_;
-            __instance.rigidbody_.angularVelocity = __instance.rotSpring_.Vel_;
+            __instance.rigidbody_.MovePosition(__instance.posSpring_.Pos_ + __instance.setCarOnFixedUpdateCoef_ * 0.01f * __instance.velSpring_.Pos_);
+            __instance.rigidbody_.MoveRotation(__instance.rotSpring_.Pos_);
+            //__instance.rigidbody_.velocity = __instance.velSpring_.Pos_;
+            //__instance.rigidbody_.angularVelocity = __instance.rotSpring_.Vel_;
             return false;
         }
     }
