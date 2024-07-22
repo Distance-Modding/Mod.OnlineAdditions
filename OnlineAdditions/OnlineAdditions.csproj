@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{50D13268-78B0-436C-9EA3-B437940457E0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OnlineAdditions</RootNamespace>
+    <AssemblyName>OnlineAdditions</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Version=9.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\publicized_assemblies\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\BepInEx\core\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Patches\Assembly-CSharp\CarLevelOfDetail\IncrementLevel.cs" />
+    <Compile Include="Patches\Assembly-CSharp\CarLevelOfDetail\SetLevelOfDetail.cs" />
+    <Compile Include="Patches\Assembly-CSharp\ChatInputV2\CheckForServerCode.cs" />
+    <Compile Include="Patches\Assembly-CSharp\ChatWindow\Update.cs" />
+    <Compile Include="Patches\Assembly-CSharp\CheatMenu\TweakCheat.cs" />
+    <Compile Include="Patches\Assembly-CSharp\CheatsManager\OnEventSceneLoadFinished.cs" />
+    <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
+    <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
+    <Compile Include="Patches\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
+    <Compile Include="Patches\Assembly-CSharp\KillGrid\OnEventAddRemovePlayerData.cs" />
+    <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
+    <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\LocalOnPlayerEventFinished.cs" />
+    <Compile Include="Patches\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
+    <Compile Include="Patches\Assembly-CSharp\PlayerDataBase\SetOutlineColor.cs" />
+    <Compile Include="Patches\Assembly-CSharp\RigidbodyStateTransceiver\EaseTowards.cs" />
+    <Compile Include="Patches\Assembly-CSharp\RigidbodyStateTransceiver\FixedUpdate.cs" />
+    <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
+    <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
