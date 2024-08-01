@@ -71,6 +71,8 @@
     <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
     <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Patches\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
+    <Compile Include="Patches\Assembly-CSharp\GUtils\IsRelevantCar.cs" />
+    <Compile Include="Patches\Assembly-CSharp\HostAGame\IncrementMaxPlayers.cs" />
     <Compile Include="Patches\Assembly-CSharp\KillGrid\OnEventAddRemovePlayerData.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\LocalOnPlayerEventFinished.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Patches\Assembly-CSharp\RigidbodyStateTransceiver\FixedUpdate.cs" />
     <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
+    <Compile Include="Patches\Assembly-CSharp\NetworkingManager\CreateServer.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

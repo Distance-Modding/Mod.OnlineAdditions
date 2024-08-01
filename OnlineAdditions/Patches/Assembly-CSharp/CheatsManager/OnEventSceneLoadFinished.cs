@@ -3,6 +3,7 @@ using System.Reflection;
 
 namespace OnlineAdditions.Patches
 {
+    //Allows cheats to be used online. Would be nice if I could send an event to clients so I could visualize stuff like Monster Truck
     [HarmonyPatch(typeof(CheatsManager), "OnEventSceneLoadFinished")]
     internal class CheatsManager__OnEventSceneLoadFinished
     {

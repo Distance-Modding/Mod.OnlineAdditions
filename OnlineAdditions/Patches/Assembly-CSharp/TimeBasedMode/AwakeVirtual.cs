@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //I'm stealing some booleans
     [HarmonyPatch(typeof(TimeBasedMode), "AwakeVirtual")]
     internal class TimeBasedMode__AwakeVirtual
     {

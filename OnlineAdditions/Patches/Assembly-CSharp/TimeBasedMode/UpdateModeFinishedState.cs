@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //Patch exists so different timeout lengths can be set.
     [HarmonyPatch(typeof(TimeBasedMode), "UpdateModeFinishedState")]
     internal class TimeBasedMode__UpdateModeFinishedState
     {
@@ -52,6 +53,7 @@ namespace OnlineAdditions.Patches
                     }
                     Mod.Log.LogInfo("Someone seems to have joined during the countdown! Canceling!");
                     //I don't actually know for sure if that's what's happening here. If that is the case Ima be pretty happy though.
+                    //THIS DOESN'T ACTUALLY WORK SINCE THIS BROADCAST DOESN'T WORK ANYWAY!
                     Events.StaticTargetedEvent<Events.RaceMode.FinalCountdownCancel.Data>.Broadcast(UnityEngine.RPCMode.All, new Events.RaceMode.FinalCountdownCancel.Data());
                     Mod.Instance.countdownActive = false;
                 }

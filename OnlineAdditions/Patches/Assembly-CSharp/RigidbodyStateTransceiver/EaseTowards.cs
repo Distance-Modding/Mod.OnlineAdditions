@@ -1,4 +1,4 @@
-﻿/*using HarmonyLib;
+﻿using HarmonyLib;
 
 namespace OnlineAdditions.Patches
 {
@@ -8,6 +8,9 @@ namespace OnlineAdditions.Patches
         [HarmonyPrefix]
         internal static bool KinematicEaseTowards(RigidbodyStateTransceiver __instance)
         {
+            //The goal here is to make it possible for Kinematic network cars to update their position in a non-snappy way.
+            //This will potentially make the replay camera less jittery and make collisions more accurate.
+            
             if (Mod.EnableCollision.Value && !Mod.Instance.playerFinished)
             {
                 RigidbodyStateTransceiver.Snapshot snapshot = RigidbodyStateTransceiver.Snapshot.Difference(__instance.goal_, new RigidbodyStateTransceiver.Snapshot(__instance.rigidbody_));
@@ -18,27 +21,27 @@ namespace OnlineAdditions.Patches
                     __instance.errorTimer_ += UnityEngine.Time.fixedDeltaTime;
                 else
                     __instance.errorTimer_ = 0.0f;
-                if (__instance.setPositionImmediate_)
+                if (__instance.setPositionImmediate_) //Not that setPositionImmediate will break physics a bit. It sets the transform directly. (Change if needed)
                     return false;
-
-                /*This is Refract's original math for positiong the car when the rigidbody is using simulated physics instead of kinematic.
                  
+                //Refract's Math.
                 UnityEngine.Vector3 vector3_1 = 100f * snapshot.pos;
                 UnityEngine.Vector3 vector3_2 = RigidbodyStateTransceiver.posCorrectionSpringDamping_ * snapshot.vel;
                 UnityEngine.Vector3 vector3_3 = 250f * snapshot.rot.ToVector3();
                 UnityEngine.Vector3 vector3_4 = RigidbodyStateTransceiver.rotCorrectionSpringDamping_ * snapshot.rotVel;
-                UnityEngine.Quaternion deltaRotation = UnityEngine.Quaternion.Euler(vector3_3 + vector3_4);*/
-                /*
-                RigidbodyStateTransceiver.Snapshot prevSnapshot = RigidbodyStateTransceiver.Snapshot.Difference(__instance.prevGoal_, new RigidbodyStateTransceiver.Snapshot(__instance.rigidbody_));
 
-                __instance.rigidbody_.interpolation = UnityEngine.RigidbodyInterpolation.Interpolate;
-
-                UnityEngine.Vector3 smoothpos = sqrMagnitude < .05f ? snapshot.pos : UnityEngine.Vector3.Lerp(prevSnapshot.pos, snapshot.pos, .5f);
-                UnityEngine.Quaternion smoothrot = sqrMagnitude < .05f ? snapshot.rot : UnityEngine.Quaternion.Lerp(prevSnapshot.rot, snapshot.rot, .5f);
-
-
-                __instance.rigidbody_.MovePosition(__instance.rigidbody_.position + smoothpos);
-                __instance.rigidbody_.MoveRotation(smoothrot * __instance.rigidbody_.rotation);
+                if (__instance.rigidbody_.isKinematic)
+                {
+                    //Kinematic position setting
+                    __instance.rigidbody_.MovePosition((vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime);
+                    __instance.rigidbody_.MoveRotation(UnityEngine.Quaternion.Euler((vector3_3 + vector3_4) * UnityEngine.Time.fixedDeltaTime));
+                }
+                else
+                {
+                    //Simulated position setting, this is Refract's original way.
+                    __instance.rigidbody_.AddForce(vector3_1 + vector3_2, UnityEngine.ForceMode.Acceleration);
+                    __instance.rigidbody_.AddTorque(vector3_3 + vector3_4, UnityEngine.ForceMode.Acceleration);
+                }
                 return false;
             }
             else
@@ -48,4 +51,4 @@ namespace OnlineAdditions.Patches
             }
         }
     }
-}*/
+}

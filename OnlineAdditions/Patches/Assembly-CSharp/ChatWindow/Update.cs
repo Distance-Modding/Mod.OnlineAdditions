@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //Hides chat. (Chat won't reappear, needs reappearing energy)
     [HarmonyPatch(typeof(ChatWindow), "Update")]
     internal class Update__ChatWindow
     {

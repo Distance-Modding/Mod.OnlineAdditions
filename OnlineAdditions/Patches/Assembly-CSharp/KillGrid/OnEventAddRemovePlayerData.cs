@@ -3,6 +3,7 @@ using Events.Player;
 
 namespace OnlineAdditions.Patches
 {
+    //This patch will stop the rendering of killgrids for every Network Car
     [HarmonyPatch(typeof(KillGrid), "OnEventAddRemovePlayerData", new System.Type[] { typeof(AddRemovePlayerData.Data) })]
     internal class KillGrid__OnEventAddRemovePlayerData
     {

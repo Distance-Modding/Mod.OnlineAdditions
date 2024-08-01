@@ -8,14 +8,13 @@ namespace OnlineAdditions.Patches
         [HarmonyPrefix]
         internal static bool DoISkipMethod()
         {
-            //False skips the original method, true does not.
             if (!Mod.Instance.uploadScore && G.Sys.NetworkingManager_.IsOnline_)
             {
-                Mod.Log.LogInfo("Skipping leaderboard upload because online collisions or cheats were enabled");
+                Mod.Log.LogInfo("Skipping leaderboard upload because online collisions, cheats, or events were enabled");
 
                 //If collisions aren't actually on right now then set upload score to true now
-                //This will prevent the situation where someone disables multiplayer collisions right before they finish
-                if (!Mod.EnableCollision.Value && !Mod.EnableCheats.Value)
+                //This will prevent the situation where someone disables multiplayer collisions right before they finish and gets their score uploaded.
+                if (!Mod.EnableCollision.Value && !Mod.EnableCheats.Value && !Mod.EnableOnlineEvents.Value)
                     Mod.Instance.uploadScore = true;
 
                 return false;

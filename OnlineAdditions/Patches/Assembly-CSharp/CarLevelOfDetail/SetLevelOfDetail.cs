@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //The max level of detail should never go more detailed than what was set by the user.
     [HarmonyPatch(typeof(CarLevelOfDetail), "SetLevelOfDetail", new System.Type[] { typeof(CarLevelOfDetail.Level) })]
     internal class CarLevelOfDetail__SetLevelOfDetail
     {

@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //Adds "(Cheating)" and "(Collision)" to your name if you have it enabled
     [HarmonyPatch(typeof(ClientLogic), "GetLocalChatName")]
     internal class ClientLogic__GetLocalChatName
     {

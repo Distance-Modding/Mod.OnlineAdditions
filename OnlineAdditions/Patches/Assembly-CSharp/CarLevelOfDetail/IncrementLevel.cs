@@ -2,6 +2,8 @@
 
 namespace OnlineAdditions.Patches
 {
+    //This is here to make sure a network car's simulation remains no matter what level of detail is on.
+    //Problem: Cars mega far away still simulate, this will change.
     [HarmonyPatch(typeof(CarLevelOfDetail), "IncrementLevel")]
     internal class CarLevelOfDetail__IncrementLevel
     {
@@ -20,6 +22,7 @@ namespace OnlineAdditions.Patches
                     {
                         if (__instance.rigidbody_.isKinematic)
                         {
+                            //Make sure fixedUpdate stops getting used as it's no longer required when collisions are off
                             __instance.rigidbodyStateTransceiver_.setCarOnFixedUpdate_ = false;
                             __instance.rigidbody_.isKinematic = false;
                         }

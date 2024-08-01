@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //Adjusted original code so the brightness of Network Cars could be changed.
     [HarmonyPatch(typeof(PlayerDataBase), "SetOutlineColor")]
     internal class PlayerDataBase__SetOutlineColor
     {

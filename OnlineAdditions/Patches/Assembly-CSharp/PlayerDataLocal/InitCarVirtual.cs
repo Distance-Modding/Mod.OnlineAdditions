@@ -2,6 +2,7 @@
 
 namespace OnlineAdditions.Patches
 {
+    //Grabbing variables.
     [HarmonyPatch(typeof(PlayerDataLocal), "InitCarVirtual")]
     internal class PlayerDataLocal__InitCarVirtual
     {

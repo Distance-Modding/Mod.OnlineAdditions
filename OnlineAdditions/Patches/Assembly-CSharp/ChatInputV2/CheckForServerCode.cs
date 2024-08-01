@@ -4,9 +4,11 @@ using System.Text.RegularExpressions;
 
 namespace OnlineAdditions.Patches
 {
+    //I can read commands in this patch. Currently only two commands: "/timeout" "/canceltimeout"
     [HarmonyPatch(typeof(ChatInputV2), "CheckForServerCode", new System.Type[] { typeof(string) })]
     internal class ChatInputV2__CheckForServerCode
     {
+
         [HarmonyPrefix]
         internal static bool CheckForCommands(ChatInputV2 __instance, string text)
         {
@@ -33,6 +35,7 @@ namespace OnlineAdditions.Patches
 
             if (key != null)
             {
+
                 if (key == "timeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
                 {
                     int time;
@@ -51,9 +54,17 @@ namespace OnlineAdditions.Patches
                 }
                 if (key == "canceltimeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
                 {
+                    //This only cancels the for client not all clients, which is bad.
                     Events.StaticTargetedEvent<FinalCountdownCancel.Data>.Broadcast(UnityEngine.RPCMode.All, new FinalCountdownCancel.Data());
                     Mod.Instance.countdownActive = false;
                     return false;
+                }
+                if (key == "restartme" && !Mod.Instance.playerFinished && !Mod.Instance.countdownActive)
+                {
+                    G.Sys.GameManager_.Mode_.FinishAllLocalPlayers(FinishType.DNF);
+                    
+                    
+                    Mod.Instance.ActivateRestart();
                 }
             }
             return true;
