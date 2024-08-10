@@ -131,7 +131,7 @@ namespace OnlineAdditions
             MaxLevelOfDetail = Config.Bind("General",
                 MaxLevelOfDetailKey,
                 CarLevelOfDetail.Level.InFocus,
-                new ConfigDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. 1 is the usual default. For an idea of how this looks, 6 turns off all animations of an online car."));
+                new ConfigDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. InFocus is the usual default. For an idea of how this looks, Speck turns off all animations of an online car."));
 
             TimeLimitAmount = Config.Bind("For Hosting",
                 TimeLimitKey,
