@@ -9,24 +9,12 @@ namespace OnlineAdditions.Patches
         [HarmonyPostfix]
         internal static void CollisionPostFix(PlayerDataNet __instance)
         {
-            //Used to activate collisions (Right now, this only affects Network cars and not The local. The problem is resetting does not actually protect you from spawn kills)
-            System.Collections.IEnumerator ActivateCollidersAfterSeconds(float seconds)
-            {
-                yield return new UnityEngine.WaitForSeconds(seconds);
-                if (!Mod.Instance.playerFinished)
-                {
-                    __instance.SetAllColliderLayers(Layers.Player2);
-                    __instance.CarLOD_.rigidbody_.isKinematic = true;
-                    __instance.CarLOD_.SetCarSimulationEnabled(true);
-                }
-            }
-
             //Activate collisions
             if (Mod.EnableCollision.Value)
             {
                 LowerImpactDeath lowerImpactDeath = __instance.carObj_.GetOrAddComponent<LowerImpactDeath>();
-                lowerImpactDeath.deathThresholdMultipler_ = 2.5f;
-                __instance.StartCoroutine(ActivateCollidersAfterSeconds(10f));
+                lowerImpactDeath.deathThresholdMultipler_ = 2.25f;
+                __instance.StartCoroutine(Mod.Instance.ActivateCollidersAfterSeconds(10f, __instance));
             }
 
             //Hide player names

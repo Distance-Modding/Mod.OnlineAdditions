@@ -7,6 +7,8 @@ namespace OnlineAdditions.Patches
     {
         //Make it so Network cars can trigger event triggers
         //Recreating Refract's code to be safe lol
+
+        //PROBLEM: Network cars do not have a collider that can event detect the event trigger on start. They need something that detects event triggers without still colliding with player
         [HarmonyPostfix]
         internal static void IsRelevantNetworkCar(UnityEngine.Collider car, ref PlayerDataBase __result)
         {

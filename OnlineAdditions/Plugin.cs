@@ -15,7 +15,7 @@ namespace OnlineAdditions
         //Mod Details
         private const string modGUID = "Distance.OnlineAdditions";
         private const string modName = "Online Additions";
-        private const string modVersion = "1.9";
+        private const string modVersion = "1.9.5";
 
         //Config Entry Strings
         public static string EnableCollisionKey = "Enable Collision";
@@ -41,7 +41,7 @@ namespace OnlineAdditions
         public static ConfigEntry<bool> HideChat { get; set; }
         public static ConfigEntry<bool> HidePlayerNames { get; set; }
         public static ConfigEntry<float> OutlineBrightness { get; set; }
-        public static ConfigEntry<int> MaxLevelOfDetail { get; set; }
+        public static ConfigEntry<CarLevelOfDetail.Level> MaxLevelOfDetail { get; set; }
         public static ConfigEntry<int> MaxPlayerCount { get; set; }
         public static ConfigEntry<int> TimeLimitAmount { get; set; }
 
@@ -50,14 +50,17 @@ namespace OnlineAdditions
         public bool amIHost { get; set; }
         public bool countdownActive { get; set; }
         public bool playerFinished { get; set; }
+        public bool selfRestart { get; set; }
         public bool uploadScore { get; set; }
         public UnityEngine.GameObject playerCar { get; set; }
         public int countdownLength { get; set; }
+        public List<PlayerDataNet> networkPlayers { get; set; }
 
         //Other
         private static readonly Harmony harmony = new Harmony(modGUID);
         public static ManualLogSource Log = new ManualLogSource(modName);
         public static Mod Instance;
+        private bool activatingCollisions = false;
 
         void Awake()
         {
@@ -68,6 +71,9 @@ namespace OnlineAdditions
 
             Log = BepInEx.Logging.Logger.CreateLogSource(modGUID);
             Logger.LogInfo("Thanks for using Online Additions!");
+
+            networkPlayers = new List<PlayerDataNet>();
+            
 
             //Config Setup
             DisableCarAudio = Config.Bind("General",
@@ -103,7 +109,7 @@ namespace OnlineAdditions
             EnableOnlineEvents = Config.Bind("Turns Off Leaderboard",
                 EnableEventsKey,
                 false,
-                new ConfigDescription("Toggle whether events get triggered by all players in multiplayer"));
+                new ConfigDescription("Toggle whether events get triggered by all players in multiplayer (Only works with Collisions on.) NOTE: CAN BREAK SEVERAL LEVELS!"));
 
             HideChat = Config.Bind("General",
                 HideChatKey,
@@ -124,9 +130,8 @@ namespace OnlineAdditions
             //Ultra, Very High, High, Medium, Low, Very Low,
             MaxLevelOfDetail = Config.Bind("General",
                 MaxLevelOfDetailKey,
-                1,
-                new ConfigDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. 1 is the usual default. For an idea of how this looks, 6 turns off all animations of an online car.",
-                    new AcceptableValueRange<int>(1,6)));
+                CarLevelOfDetail.Level.InFocus,
+                new ConfigDescription("The maximum detail online cars can have. This will lower the visual quality other cars have online. 1 is the usual default. For an idea of how this looks, 6 turns off all animations of an online car."));
 
             TimeLimitAmount = Config.Bind("For Hosting",
                 TimeLimitKey,
@@ -163,23 +168,91 @@ namespace OnlineAdditions
                 settingChangedEventArgs.ChangedSetting.Definition.Key == EnableEventsKey)
             {
                 uploadScore = false;
+                
             }
         }
 
         public void ActivateRestart()
         {
-            StopCoroutine("Chat Input");
+            //StopCoroutine("ChatInput");
             StartCoroutine(ActivateRestartAfterSeconds(2));
         }
 
-        //Should restart the level.
-        private System.Collections.IEnumerator ActivateRestartAfterSeconds(float seconds)
+        //Should restart the level BUT IT DOESN'T WORK! SAD!
+        public System.Collections.IEnumerator ActivateRestartAfterSeconds(float seconds)
         {
             yield return new UnityEngine.WaitForSeconds(seconds);
-            Log.LogInfo("I am the Restart Coroutine");
-            if (!Instance.playerFinished && !Instance.countdownActive)
+            //Log.LogInfo("I am the Restart Coroutine");
+            playerCar = null; //I have to make the car null to void the infinite loading screen
+            //Player's state needs to be set to LoadingGameModeScene so it doesn't get stuck.
+            selfRestart = true;
+            if (Instance.playerFinished && !Instance.countdownActive)
             {
-                G.Sys.GameManager_.RestartLevel();
+                //MMmmmmm sadge
+                G.Sys.PlayerManager_.clientLogic_.UpdateLevelIfNecessaryThenGoToGameMode();
+            }
+        }
+
+        public System.Collections.IEnumerator ActivateCollidersAfterSeconds(float seconds)
+        {
+            networkPlayers.RemoveAll(item => item == null);
+            if (!networkPlayers.IsNullOrEmpty())
+            {
+                activatingCollisions = true;
+                foreach (PlayerDataNet playerNet in networkPlayers)
+                {
+                    if (playerNet.CarLOD_ != null)
+                    {
+                        //Log.LogInfo("Collisions off for " + playerNet.name_);
+                        playerNet.SetAllColliderLayers(Layers.OnlineCar);
+                        playerNet.CarLOD_.rigidbody_.isKinematic = false;
+                        playerNet.CarLOD_.SetCarSimulationEnabled(false);
+                    }
+                    //else
+                        //Log.LogInfo("Car Does not Exist!");
+                }
+                yield return new UnityEngine.WaitForSeconds(seconds);
+                activatingCollisions = false;
+                if (!Mod.Instance.playerFinished)
+                {
+                    networkPlayers.RemoveAll(item => item == null);
+                    foreach (PlayerDataNet playerNet in networkPlayers)
+                    {
+                        if (playerNet.CarLOD_ != null)
+                        {
+                            //Log.LogInfo("Collisions on for " + playerNet.name_);
+                            playerNet.SetAllColliderLayers(Layers.Player2);
+                            playerNet.CarLOD_.rigidbody_.isKinematic = true;
+                            playerNet.CarLOD_.SetCarSimulationEnabled(true);
+                        }
+                       // else
+                            //Log.LogInfo("Car Does not Exist!");
+                    }
+                }
+            }
+            //else
+                //Log.LogInfo("No Network Players exist!");
+        }
+
+        public System.Collections.IEnumerator ActivateCollidersAfterSeconds(float seconds, PlayerDataNet playerNet)
+        {
+            if (!activatingCollisions)
+            {
+                playerNet.SetAllColliderLayers(Layers.OnlineCar);
+                playerNet.CarLOD_.rigidbody_.isKinematic = false;
+                playerNet.CarLOD_.SetCarSimulationEnabled(false);
+                yield return new UnityEngine.WaitForSeconds(seconds);
+                if (playerNet.CarLOD_ != null)
+                {
+                    //Log.LogInfo("Collisions on for " + playerNet.name_);
+                    playerNet.SetAllColliderLayers(Layers.Player2);
+                    playerNet.CarLOD_.rigidbody_.isKinematic = true;
+                    playerNet.CarLOD_.SetCarSimulationEnabled(true);
+                }
+            }
+            else
+            {
+                //Log.LogInfo("Already Activating Collisions");
             }
         }
     }

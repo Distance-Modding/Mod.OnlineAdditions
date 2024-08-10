@@ -10,6 +10,7 @@ namespace OnlineAdditions.Patches
         internal static void UpdatePlayerFinishedState()
         {
             Mod.Instance.playerFinished = true;
+            //Mod.Instance.networkPlayers.Clear();
         }
     }
 }

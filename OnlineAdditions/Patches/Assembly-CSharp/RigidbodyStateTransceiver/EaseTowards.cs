@@ -21,7 +21,7 @@ namespace OnlineAdditions.Patches
                     __instance.errorTimer_ += UnityEngine.Time.fixedDeltaTime;
                 else
                     __instance.errorTimer_ = 0.0f;
-                if (__instance.setPositionImmediate_) //Not that setPositionImmediate will break physics a bit. It sets the transform directly. (Change if needed)
+                if (__instance.setPositionImmediate_) //Note that setPositionImmediate will break physics a bit. It sets the transform directly. (Change if needed)
                     return false;
                  
                 //Refract's Math.
@@ -34,7 +34,7 @@ namespace OnlineAdditions.Patches
                 {
                     //Kinematic position setting
                     __instance.rigidbody_.MovePosition((vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime);
-                    __instance.rigidbody_.MoveRotation(UnityEngine.Quaternion.Euler((vector3_3 + vector3_4) * UnityEngine.Time.fixedDeltaTime));
+                    __instance.rigidbody_.MoveRotation(UnityEngine.Quaternion.Euler((vector3_3 + vector3_4) * UnityEngine.Time.fixedDeltaTime).Normalized());
                 }
                 else
                 {
@@ -42,6 +42,9 @@ namespace OnlineAdditions.Patches
                     __instance.rigidbody_.AddForce(vector3_1 + vector3_2, UnityEngine.ForceMode.Acceleration);
                     __instance.rigidbody_.AddTorque(vector3_3 + vector3_4, UnityEngine.ForceMode.Acceleration);
                 }
+
+                //This should prevent the car doing insane snaps into place when collisions start
+                __instance.goal_.SetData(__instance.rigidbody_);
                 return false;
             }
             else

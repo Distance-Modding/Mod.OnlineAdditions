@@ -52,20 +52,22 @@ namespace OnlineAdditions.Patches
                     Mod.Instance.countdownActive = true;
                     return false;
                 }
-                if (key == "canceltimeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
+
+                /*if (key == "canceltimeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
                 {
                     //This only cancels the for client not all clients, which is bad.
                     Events.StaticTargetedEvent<FinalCountdownCancel.Data>.Broadcast(UnityEngine.RPCMode.All, new FinalCountdownCancel.Data());
                     Mod.Instance.countdownActive = false;
                     return false;
                 }
+
                 if (key == "restartme" && !Mod.Instance.playerFinished && !Mod.Instance.countdownActive)
                 {
                     G.Sys.GameManager_.Mode_.FinishAllLocalPlayers(FinishType.DNF);
                     
                     
-                    Mod.Instance.ActivateRestart();
-                }
+                    Mod.Instance.StartCoroutine(Mod.Instance.ActivateRestartAfterSeconds(2f));
+                }*/
             }
             return true;
         }

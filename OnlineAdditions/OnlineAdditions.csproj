@@ -76,10 +76,12 @@
     <Compile Include="Patches\Assembly-CSharp\KillGrid\OnEventAddRemovePlayerData.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\InitCarVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataLocal\LocalOnPlayerEventFinished.cs" />
+    <Compile Include="Patches\Assembly-CSharp\PlayerDataNet\AwakeVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataNet\InitCarVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\PlayerDataBase\SetOutlineColor.cs" />
     <Compile Include="Patches\Assembly-CSharp\RigidbodyStateTransceiver\EaseTowards.cs" />
     <Compile Include="Patches\Assembly-CSharp\RigidbodyStateTransceiver\FixedUpdate.cs" />
+    <Compile Include="Patches\Assembly-CSharp\ServerLogic\OnEventCompletedRequest.cs" />
     <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\AwakeVirtual.cs" />
     <Compile Include="Patches\Assembly-CSharp\TimeBasedMode\UpdateModeFinishedState.cs" />
     <Compile Include="Patches\Assembly-CSharp\NetworkingManager\CreateServer.cs" />
