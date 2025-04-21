@@ -20,12 +20,17 @@ namespace OnlineAdditions.Patches
                     messageFrom = regexName.Matches(data.message_)[0].Value;
                     if (messageFrom != Mod.Instance.playerName)
                     {
+                        Mod.Instance.cameFromHost = false;
                         messageText = regexMessage.Matches(data.message_)[0].Value;
                         int num1 = messageText.IndexOf(" ");
                         string key = messageText.Substring(num1 + 1, messageText.Length - (num1 + 1));
                         //Mod.Log.LogInfo(messageText);
                         //Mod.Log.LogInfo(key);
                         __instance.CheckForServerCode(key);
+                    }
+                    else
+                    {
+                        Mod.Instance.cameFromHost = true;
                     }
                 }
             }

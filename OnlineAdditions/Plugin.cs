@@ -49,6 +49,7 @@ namespace OnlineAdditions
         //Public Variables
         public bool allPlayersFinished { get; set; }
         public bool amIHost { get; set; }
+        public bool cameFromHost { get; set; }
         public bool commandFromHost { get; set; }
         public bool countdownActive { get; set; }
         public bool playerFinished { get; set; }

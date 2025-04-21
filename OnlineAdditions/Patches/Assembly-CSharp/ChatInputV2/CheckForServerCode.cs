@@ -21,7 +21,8 @@ namespace OnlineAdditions.Patches
         [HarmonyPrefix]
         internal static bool CheckForCommands(ChatInputV2 __instance, string text)
         {
-            Mod.Log.LogInfo(text);
+            //Mod.Log.LogInfo(text);
+            //Mod.Log.LogInfo("Came From Host?: " + Mod.Instance.cameFromHost);
             if (string.IsNullOrEmpty(text) || text.Length > 0 && text[0] != '/')
             {
                 Mod.Log.LogInfo("Not a command!");
@@ -48,10 +49,18 @@ namespace OnlineAdditions.Patches
 
             if (key != null)
             {
-                Mod.Log.LogInfo("Command is: " + key);
+                //Mod.Log.LogInfo("Command is: " + key);
                 if (key == "date")
                 {
-                    StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Current date: " + DateTime.Now.ToString()));
+                    if (Mod.Instance.amIHost)
+                    {
+                        StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Current Date of Host: " + DateTime.Now.ToString()));
+                    }
+                    else
+                    {
+                        __instance.AddChat("Current Date of Client: " + DateTime.Now.ToString());
+                    }
+
                     return false;
                 }
 
@@ -95,7 +104,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "playercount" && Mod.Instance.amIHost)
+                if (key == "playercount" && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                 {
                     if(string.IsNullOrEmpty(str))
                     {
@@ -113,7 +122,7 @@ namespace OnlineAdditions.Patches
                     return true;
                 }
 
-                if (key == "private" && Mod.Instance.amIHost)
+                if (key == "private" && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                 {
                     if (!string.IsNullOrEmpty(str))
                     {
@@ -134,7 +143,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "public" && Mod.Instance.amIHost)
+                if (key == "public" && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                 {
                     G.Sys.NetworkingManager_.password_ = "";
                     G.Sys.NetworkingManager_.privateServer_ = false;
@@ -146,7 +155,7 @@ namespace OnlineAdditions.Patches
 
                 if (key == "server")
                 {
-                    if (!string.IsNullOrEmpty(str) && !flag)
+                    if (!string.IsNullOrEmpty(str) && !flag && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                     {
                         G.Sys.NetworkingManager_.serverTitle_ = str;
                         G.Sys.NetworkingManager_.ReportToMasterServer();
@@ -159,7 +168,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "shuffle" && Mod.Instance.amIHost)
+                if (key == "shuffle" && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                 {
                     if (G.Sys.GameManager_.ModeID_ == GameModeID.Trackmogrify)
                     {
@@ -194,7 +203,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "timeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
+                if (key == "timeout" && Mod.Instance.amIHost && Mod.Instance.cameFromHost && !Mod.Instance.allPlayersFinished)
                 {
                     int time;
                     if (flag)
@@ -211,7 +220,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "canceltimeout" && Mod.Instance.amIHost && !Mod.Instance.allPlayersFinished)
+                if (key == "canceltimeout" && Mod.Instance.amIHost && Mod.Instance.cameFromHost && !Mod.Instance.allPlayersFinished)
                 {
                     StaticTransceivedEvent<FinalCountdownCancel.Data>.Broadcast(new FinalCountdownCancel.Data());
                     Mod.Instance.countdownActive = false;
