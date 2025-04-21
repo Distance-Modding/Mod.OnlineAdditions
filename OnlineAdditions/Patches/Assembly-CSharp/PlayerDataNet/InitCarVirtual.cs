@@ -10,8 +10,9 @@ namespace OnlineAdditions.Patches
         internal static void CollisionPostFix(PlayerDataNet __instance)
         {
             //Activate collisions
-            if (Mod.EnableCollision.Value)
+            if (Mod.EnableCollision.Value && !Mod.Instance.playerFinished)
             {
+
                 LowerImpactDeath lowerImpactDeath = __instance.carObj_.GetOrAddComponent<LowerImpactDeath>();
                 lowerImpactDeath.deathThresholdMultipler_ = 2.25f;
                 __instance.StartCoroutine(Mod.Instance.ActivateCollidersAfterSeconds(10f, __instance));

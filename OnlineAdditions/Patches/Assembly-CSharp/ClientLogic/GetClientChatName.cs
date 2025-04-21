@@ -17,6 +17,10 @@ namespace OnlineAdditions.Patches
                 cheating = " (Cheating)";
             if (Mod.EnableCollision.Value)
                 collision += " (Collision)";
+
+            int num1 = split_result[2].IndexOf("]");
+            Mod.Instance.playerName = split_result[2].Substring(num1 + 1, split_result[2].Length - num1 - 1) + cheating + collision;
+
             __result = split_result[1] + split_result[2] + cheating + collision + split_result[3] + split_result[4];
         }
     }

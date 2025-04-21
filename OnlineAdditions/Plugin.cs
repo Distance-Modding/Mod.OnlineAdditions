@@ -1,11 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Events;
+using Events.Local;
+using Events.ClientToAllClients;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OnlineAdditions
 {
@@ -15,7 +16,7 @@ namespace OnlineAdditions
         //Mod Details
         private const string modGUID = "Distance.OnlineAdditions";
         private const string modName = "Online Additions";
-        private const string modVersion = "1.9.5";
+        private const string modVersion = "2.0.0";
 
         //Config Entry Strings
         public static string EnableCollisionKey = "Enable Collision";
@@ -27,9 +28,9 @@ namespace OnlineAdditions
         public static string HideChatKey = "Hide Chat";
         public static string HidePlayersKey = "Hide Player Names";
         public static string MaxLevelOfDetailKey = "Max Level Of Car Detail";
-        public static string MaxPlayerKey = "Max Number of Players for Hosting Servers";
-        public static string OutlineKey = "Adjust Brightness of Car Outlines";
-        public static string TimeLimitKey = "Adjust Time Limit Amount";
+        public static string MaxPlayerKey = "Max Players (For Host)";
+        public static string OutlineKey = "Car Outline Brightness";
+        public static string TimeLimitKey = "Time Limit Amount";
 
         //Config Entries
         public static ConfigEntry<bool> DisableCarAudio { get; set; }
@@ -48,6 +49,7 @@ namespace OnlineAdditions
         //Public Variables
         public bool allPlayersFinished { get; set; }
         public bool amIHost { get; set; }
+        public bool commandFromHost { get; set; }
         public bool countdownActive { get; set; }
         public bool playerFinished { get; set; }
         public bool selfRestart { get; set; }
@@ -55,6 +57,7 @@ namespace OnlineAdditions
         public UnityEngine.GameObject playerCar { get; set; }
         public int countdownLength { get; set; }
         public List<PlayerDataNet> networkPlayers { get; set; }
+        public string playerName { get; set; }
 
         //Other
         private static readonly Harmony harmony = new Harmony(modGUID);
@@ -157,6 +160,11 @@ namespace OnlineAdditions
             Logger.LogInfo("Loaded!");
         }
 
+        public void LateInitialize()
+        {
+            //Used for nothin right now
+        }
+
         private void OnConfigChanged(object sender, EventArgs e)
         {
             SettingChangedEventArgs settingChangedEventArgs = e as SettingChangedEventArgs;
@@ -207,6 +215,8 @@ namespace OnlineAdditions
                         playerNet.SetAllColliderLayers(Layers.OnlineCar);
                         playerNet.CarLOD_.rigidbody_.isKinematic = false;
                         playerNet.CarLOD_.SetCarSimulationEnabled(false);
+                        playerNet.GlowColor_ = UnityEngine.Color.white;
+                        playerNet.SetOutlineColor();
                     }
                     //else
                         //Log.LogInfo("Car Does not Exist!");
@@ -224,6 +234,8 @@ namespace OnlineAdditions
                             playerNet.SetAllColliderLayers(Layers.Player2);
                             playerNet.CarLOD_.rigidbody_.isKinematic = true;
                             playerNet.CarLOD_.SetCarSimulationEnabled(true);
+                            playerNet.GlowColor_ = playerNet.OriginalGlowColor_;
+                            playerNet.SetOutlineColor();
                         }
                        // else
                             //Log.LogInfo("Car Does not Exist!");
@@ -241,6 +253,8 @@ namespace OnlineAdditions
                 playerNet.SetAllColliderLayers(Layers.OnlineCar);
                 playerNet.CarLOD_.rigidbody_.isKinematic = false;
                 playerNet.CarLOD_.SetCarSimulationEnabled(false);
+                playerNet.GlowColor_ = UnityEngine.Color.white;
+                playerNet.SetOutlineColor();
                 yield return new UnityEngine.WaitForSeconds(seconds);
                 if (playerNet.CarLOD_ != null)
                 {
@@ -248,6 +262,8 @@ namespace OnlineAdditions
                     playerNet.SetAllColliderLayers(Layers.Player2);
                     playerNet.CarLOD_.rigidbody_.isKinematic = true;
                     playerNet.CarLOD_.SetCarSimulationEnabled(true);
+                    playerNet.GlowColor_ = playerNet.OriginalGlowColor_;
+                    playerNet.SetOutlineColor();
                 }
             }
             else

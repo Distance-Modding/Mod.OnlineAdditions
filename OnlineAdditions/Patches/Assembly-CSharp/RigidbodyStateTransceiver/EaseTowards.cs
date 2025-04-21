@@ -30,6 +30,45 @@ namespace OnlineAdditions.Patches
                 UnityEngine.Vector3 vector3_3 = 250f * snapshot.rot.ToVector3();
                 UnityEngine.Vector3 vector3_4 = RigidbodyStateTransceiver.rotCorrectionSpringDamping_ * snapshot.rotVel;
 
+                /*
+                 * I gave up. This didn't quite work the way I wanted and I think it'll take too long to do it at this point
+                 * 
+                //Raycast to prevent the car from moving through roads
+
+                //Raycast and the line renderer may not be the same, figure that shit out mang
+                UnityEngine.LineRenderer line = __instance.GetOrAddComponent<UnityEngine.LineRenderer>();
+                line.useWorldSpace = false;
+                line.sortingOrder = 1;
+                UnityEngine.RaycastHit hit;
+                UnityEngine.Vector3 hit_position = UnityEngine.Vector3.zero;
+                UnityEngine.Vector3 result_position;
+                UnityEngine.Vector3 snap_direction = (__instance.rigidbody_.position - snapshot.pos).normalized;
+                if (UnityEngine.Physics.Raycast(__instance.prevGoal_.pos, snap_direction, out hit, 500)) //use sqrmagnitude instead of 500
+                {
+                    line.material.color = UnityEngine.Color.yellow;
+                    line.SetPosition(0, __instance.rigidbody_.position);
+                    line.SetPosition(1, hit.point);
+                    hit_position = hit.point;
+                }
+                else
+                {
+                    line.material.color = UnityEngine.Color.green;
+                    line.SetPosition(0, __instance.rigidbody_.position);
+                    line.SetPosition(0, snapshot.pos);
+                }
+
+                result_position = (vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime;
+
+                if (hit_position != UnityEngine.Vector3.zero)
+                {
+                    //Compare magnitude instead of distance?? Hmm.
+                    if (UnityEngine.Vector3.Distance((vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime, __instance.transform.position) > UnityEngine.Vector3.Distance(hit_position, __instance.transform.position))
+                    {
+                        //Move it backward along the ray??? The result should be at the hit_position I think
+                        result_position = (vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime + (UnityEngine.Vector3.up * UnityEngine.Vector3.Distance((vector3_1 + vector3_2) * UnityEngine.Time.fixedDeltaTime, hit_position));
+                    }
+                }*/
+
                 if (__instance.rigidbody_.isKinematic)
                 {
                     //Kinematic position setting
