@@ -16,7 +16,7 @@ namespace OnlineAdditions
         //Mod Details
         private const string modGUID = "Distance.OnlineAdditions";
         private const string modName = "Online Additions";
-        private const string modVersion = "2.0.0";
+        private const string modVersion = "2.0.1";
 
         //Config Entry Strings
         public static string EnableCollisionKey = "Enable Collision";
@@ -163,7 +163,10 @@ namespace OnlineAdditions
 
         public void LateInitialize()
         {
-            //Used for nothin right now
+            if (EnableCheats.Value || EnableCollision.Value || EnableOnlineEvents.Value)
+                uploadScore = false;
+            else
+                uploadScore = true;
         }
 
         private void OnConfigChanged(object sender, EventArgs e)
