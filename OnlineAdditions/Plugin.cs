@@ -16,7 +16,7 @@ namespace OnlineAdditions
         //Mod Details
         private const string modGUID = "Distance.OnlineAdditions";
         private const string modName = "Online Additions";
-        private const string modVersion = "2.0.1";
+        private const string modVersion = "2.0.2";
 
         //Config Entry Strings
         public static string EnableCollisionKey = "Enable Collision";

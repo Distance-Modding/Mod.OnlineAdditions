@@ -32,18 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\BepInEx\core\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\AppData\Roaming\r2modmanPlus-local\Distance\profiles\Alt\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=9.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\publicized_assemblies\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\publicized_assemblies\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\BepInEx\core\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\NAudio.dll</HintPath>
+    <Reference Include="BepInEx, Version=5.4.23.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\AppData\Roaming\r2modmanPlus-local\Distance\profiles\Alt\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,14 +50,17 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.Networking.dll</HintPath>
+    <Reference Include="UnityEngine.Networking, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.UI.dll</HintPath>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Distance\Distance_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +74,7 @@
     <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetClientChatName.cs" />
     <Compile Include="Patches\Assembly-CSharp\ClientLogic\GetLocalChatName.cs" />
     <Compile Include="Patches\Assembly-CSharp\GameManager\Awake.cs" />
+    <Compile Include="Patches\Assembly-CSharp\GameManager\OnEventSceneStartLoad.cs" />
     <Compile Include="Patches\Assembly-CSharp\GameMode\UploadScoreAndReplay.cs" />
     <Compile Include="Patches\Assembly-CSharp\GUtils\IsRelevantCar.cs" />
     <Compile Include="Patches\Assembly-CSharp\HostAGame\IncrementMaxPlayers.cs" />
