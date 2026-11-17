@@ -9,8 +9,8 @@ namespace OnlineAdditions.Patches
         [HarmonyPrefix]
         internal static bool CheckMotorcycleCheat(ECheat c)
         {
-            //It will not generate the motorcycle cheat in the menu if cheats are enabled in multiplayer
-            if (c == ECheat.MotorcycleMode && Mod.EnableCheats.Value)
+            //It will not generate the motorcycle cheat in the menu when you are in multiplayer
+            if (c == ECheat.MotorcycleMode && G.Sys.NetworkingManager_.IsOnline_)
                 return false;
             else
                 return true;

@@ -1,22 +1,29 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using Events;
-using Events.Local;
-using Events.ClientToAllClients;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 
 namespace OnlineAdditions
 {
+    /* ADDED:
+     * Command messages can only come from the host
+     * Unintended behavior with the cheats menu has been fixed
+     * Appends in gameplay related cheat to your username if it is enabled
+     * No longer appends "(Cheating)" to your username
+     * Fixed an issue where certain characters in a username would break the text color formatting
+     * Max Level of Car Detail no longer applies to your local car
+     * 
+     */
+
     [BepInPlugin(modGUID, modName, modVersion)]
     public sealed class Mod : BaseUnityPlugin
     {
         //Mod Details
         private const string modGUID = "Distance.OnlineAdditions";
         private const string modName = "Online Additions";
-        private const string modVersion = "2.0.2";
+        private const string modVersion = "2.0.3";
 
         //Config Entry Strings
         public static string EnableCollisionKey = "Enable Collision";

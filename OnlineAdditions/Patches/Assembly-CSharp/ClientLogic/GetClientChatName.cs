@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.Text.RegularExpressions;
 
 namespace OnlineAdditions.Patches
 {
@@ -9,19 +10,33 @@ namespace OnlineAdditions.Patches
         [HarmonyPostfix]
         internal static void ModifyLocalPlayerName(ClientLogic __instance, ref string __result)
         {
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\[)");
-            string[] split_result = regex.Split(__result);
+            Mod.Log.LogInfo("Client Chat Name: " + __result);
+            Regex regex = new Regex($@"({__instance.localPlayerInfos_[0].Username_})");
+            string[] split_result = regex.Split(__result, 2);
+            foreach(string s in split_result)
+            {
+                Mod.Log.LogInfo("Split: " + s);
+            }
             string cheating = string.Empty;
             string collision = string.Empty;
             if (Mod.EnableCheats.Value)
-                cheating = " (Cheating)";
+            {
+                string cheatString = "";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.MonsterTruck)) cheatString += " (Monster Truck)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.SkyWalker)) cheatString += " (Sky Walker)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.SuperBoost)) cheatString += " (Super Boost)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.DeathProof)) cheatString += " (Death Proof)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.PreservationalBoosterSloth)) cheatString += " (Sloth)";
+
+
+                cheating = cheatString;
+            }
             if (Mod.EnableCollision.Value)
-                collision += " (Collision)";
+                collision = " (Collision)";
 
-            int num1 = split_result[2].IndexOf("]");
-            Mod.Instance.playerName = split_result[2].Substring(num1 + 1, split_result[2].Length - num1 - 1) + cheating + collision;
+            Mod.Instance.playerName = __instance.localPlayerInfos_[0].Username_ + cheating + collision;
 
-            __result = split_result[1] + split_result[2] + cheating + collision + split_result[3] + split_result[4];
+            __result = split_result[0] + split_result[1] + cheating + collision + split_result[2];//*/
         }
     }
 }

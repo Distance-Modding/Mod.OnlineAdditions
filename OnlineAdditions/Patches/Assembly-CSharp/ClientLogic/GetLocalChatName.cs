@@ -10,7 +10,17 @@ namespace OnlineAdditions.Patches
         internal static void ModifyLocalPlayerName(ref string __result)
         {
             if (Mod.EnableCheats.Value)
-                __result += " (Cheating)";
+            {
+                string cheatString = "";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.MonsterTruck)) cheatString += " (Monster Truck)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.SkyWalker)) cheatString += " (Sky Walker)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.SuperBoost)) cheatString += " (Super Boost)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.DeathProof)) cheatString += " (Death Proof)";
+                if (G.Sys.CheatsManager_.IsEnabled(ECheat.PreservationalBoosterSloth)) cheatString += " (Sloth)";
+                
+
+                __result += cheatString;
+            }
             if (Mod.EnableCollision.Value)
                 __result += " (Collision)";
         }

@@ -25,7 +25,7 @@ namespace OnlineAdditions.Patches
             //Mod.Log.LogInfo("Came From Host?: " + Mod.Instance.cameFromHost);
             if (string.IsNullOrEmpty(text) || text.Length > 0 && text[0] != '/')
             {
-                Mod.Log.LogInfo("Not a command!");
+                //Mod.Log.LogInfo("Not a command!");
                 return true;
             }
             int num1 = text.IndexOf(" ");
@@ -50,55 +50,34 @@ namespace OnlineAdditions.Patches
             if (key != null)
             {
                 //Mod.Log.LogInfo("Command is: " + key);
-                if (key == "date")
+                if (key == "date" && Mod.Instance.amIHost)
                 {
-                    if (Mod.Instance.amIHost)
-                    {
-                        StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Current Date of Host: " + DateTime.Now.ToString()));
-                    }
-                    else
-                    {
-                        __instance.AddChat("Current Date of Client: " + DateTime.Now.ToString());
-                    }
+                    StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Current Date of Host: " + DateTime.Now.ToString()));
 
                     return false;
                 }
 
-                if (key == "help")
+                if (key == "help" && Mod.Instance.amIHost)
                 {
                     if (!string.IsNullOrEmpty(str))
                     {
                         string helpDescription = HelpDescription(str);
-                        if (Mod.Instance.amIHost)
-                        {
-                            StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data(helpDescription));
-                        }
-                        else
-                        {
-                            __instance.AddChat(helpDescription);
-                        }
+                        StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data(helpDescription));
                     }
                     else
                     {
-                        if (Mod.Instance.amIHost)
-                        {
-                            StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data(HelpCommandList));
-                        }
-                        else
-                        {
-                            __instance.AddChat(HelpCommandList);
-                        }
+                        StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data(HelpCommandList));
                     }
                     return false;
                 }
 
-                if (key == "level")
+                if (key == "level" && Mod.Instance.amIHost)
                 {
                     StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Current Level: " + G.Sys.GameManager_.LevelName_));
                     return false;
                 }
 
-                if (key == "description")
+                if (key == "description" && Mod.Instance.amIHost)
                 {
                     StaticTransceivedEvent<ChatMessage.Data>.Broadcast(new ChatMessage.Data("Level Description: " + G.Sys.LevelSets_.GetLevelInfo(G.Sys.GameManager_.LevelPath_).levelDescription_));
                     return false;
@@ -153,7 +132,7 @@ namespace OnlineAdditions.Patches
                     return false;
                 }
 
-                if (key == "server")
+                if (key == "server" && Mod.Instance.amIHost)
                 {
                     if (!string.IsNullOrEmpty(str) && !flag && Mod.Instance.amIHost && Mod.Instance.cameFromHost)
                     {
@@ -172,7 +151,7 @@ namespace OnlineAdditions.Patches
                 {
                     if (G.Sys.GameManager_.ModeID_ == GameModeID.Trackmogrify)
                     {
-                        __instance.AddChat(("You can't manage the playlist in trackmogrify").Colorize("[CE3333]"));
+                        __instance.AddChat(("You can't manage the playlist in trackmogrify mode").Colorize("[CE3333]"));
                         return false;
                     }
 

@@ -9,9 +9,16 @@ namespace OnlineAdditions.Patches
         [HarmonyPrefix]
         internal static bool MaxLevelDetail(CarLevelOfDetail __instance, CarLevelOfDetail.Level newLevel)
         {
-            if (newLevel < (CarLevelOfDetail.Level)Mod.MaxLevelOfDetail.Value && G.Sys.NetworkingManager_.IsOnline_)
+            if (__instance != G.Sys.PlayerManager_.LocalPlayers_[0].playerData_.carLOD_)
             {
-                return false;
+                if (newLevel < (CarLevelOfDetail.Level)Mod.MaxLevelOfDetail.Value && G.Sys.NetworkingManager_.IsOnline_)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
             {
